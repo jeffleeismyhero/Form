@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Form by hyperoslo</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Form</h1>
+        <h2>JSON driven form</h2>
+        <a href="https://github.com/hyperoslo/Form" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><img src="https://raw.githubusercontent.com/hyperoslo/Form/master/Images/logo-v5.png" alt="Form logo"></p>
+
+<p>The most flexible and powerful way to build a form on iOS.</p>
+
+<p>Form came out from our need to have a form that could share logic between our iOS apps and our web clients. We found that JSON was the best way to achieve this.</p>
+
+<p>Form includes the following features:</p>
+
+<ul>
+<li>Multiple groups: For example, you can have a group for personal details and another one for shipping information</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L19">Field validations</a>: We support <code>required</code>, <code>maximum_length</code>, <code>minimum_length</code> and <code>format</code> (regex). We also support many field types, like <code>text</code>, <code>number</code>, <code>phone_number</code>, <code>email</code>, <code>date</code>, <code>name</code> and more</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L15">Custom sizes</a>: Total <code>width</code> is handled as 100% while <code>height</code> is handled in chunks of <a href="https://github.com/hyperoslo/Form/blob/b1a542d042a45a9a3056fb8969b5704e51fda1f4/Source/Cells/Base/FORMBaseFieldCell.h#L15">85 px</a>
+</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L78">Custom fields</a>: You can register your custom fields, and it's pretty simple (our basic example includes how to make an <code>image</code> field)</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L47">Formulas or computed values</a>: We support fields that contain generated values from other fields</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L127">Targets</a>: <code>hide</code>, <code>show</code>, <code>update</code>, <code>enable</code>, <code>disable</code> or <code>clear</code> a field using a target. It's pretty powerful, and you can even set a condition for your target to run</li>
+<li>
+<a href="https://github.com/hyperoslo/Form/blob/d426e7b090fee7a630d1208b87c63a85b6aaf5df/Demos/Basic-ObjC/Basic-ObjC/Assets/forms.json#L122">Dropdowns</a>: Generating dropdowns is as easy as adding values to your field, values support <code>default</code> flags, targets (in case you want to trigger hiding a field based on a selection), string values or numeric values and subtitles (in case you want to hint the consequences of your selection)</li>
+</ul>
+
+<p>Don't forget to check our <a href="https://github.com/hyperoslo/Form/tree/master/Demos/Basic-ObjC">Basic Demo</a> for a basic example on how to use Form.</p>
+
+<p>At the moment Form only supports the iPad, but support for the iPhone will come soon.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="basic-form" class="anchor" href="#basic-form" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Form</h3>
+
+<p>This are the required steps to create a basic form with a first name field.</p>
+
+<p><img src="https://github.com/hyperoslo/Form/blob/master/Images/basic-form.png" alt="Form"></p>
+
+<h4>
+<a id="json" class="anchor" href="#json" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON</h4>
+
+<div class="highlight highlight-json"><pre>[
+  {
+    <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>group-id<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Group title<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>sections<span class="pl-pds">"</span></span>:[
+      {
+        <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>section-0<span class="pl-pds">"</span></span>,
+        <span class="pl-s1"><span class="pl-pds">"</span>fields<span class="pl-pds">"</span></span>:[
+          {
+            <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>first_name<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>First name<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>:{
+              <span class="pl-s1"><span class="pl-pds">"</span>width<span class="pl-pds">"</span></span>:<span class="pl-c1">30</span>,
+              <span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>:<span class="pl-c1">1</span>
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</pre></div>
+
+<h4>
+<a id="in-your-ipad-app" class="anchor" href="#in-your-ipad-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>In your iPad app</h4>
+
+<h5>
+<a id="appdelegate" class="anchor" href="#appdelegate" aria-hidden="true"><span class="octicon octicon-link"></span></a>AppDelegate</h5>
+
+<div class="highlight highlight-objc"><pre>- (<span class="pl-st">BOOL</span>)application:(UIApplication *)application didFinishLaunchingWithOptions:(<span class="pl-s3">NSDictionary</span> *)launchOptions
+{
+    <span class="pl-c">// Don't forget to set your style, or use the default one if you want</span>
+    [FORMDefaultStyle <span class="pl-s3">applyStyle</span>];
+
+    <span class="pl-c">//...</span>
+}</pre></div>
+
+<h5>
+<a id="uicollectionviewcontroller" class="anchor" href="#uicollectionviewcontroller" aria-hidden="true"><span class="octicon octicon-link"></span></a>UICollectionViewController</h5>
+
+<div class="highlight highlight-objc"><pre>- (FORMDataSource *)dataSource
+{
+    <span class="pl-k">if</span> (_dataSource) <span class="pl-k">return</span> _dataSource;
+
+    _dataSource = [[FORMDataSource <span class="pl-s3">alloc</span>] <span class="pl-s3">initWithJSON:</span><span class="pl-v">self</span>.JSON
+                                        <span class="pl-s3">collectionView:</span><span class="pl-v">self</span>.collectionView
+                                                <span class="pl-s3">layout:</span><span class="pl-v">self</span>.layout
+                                                <span class="pl-s3">values:</span>@{<span class="pl-s1"><span class="pl-pds">@"</span>first_name<span class="pl-pds">"</span></span> : <span class="pl-s1"><span class="pl-pds">@"</span>Ola<span class="pl-pds">"</span></span>}
+                                              <span class="pl-s3">disabled:</span><span class="pl-c1">NO</span>];
+
+    <span class="pl-k">return</span> _dataSource;
+}
+
+- (<span class="pl-st">void</span>)viewDidLoad
+{
+    [<span class="pl-v">super</span> <span class="pl-s3">viewDidLoad</span>];
+
+    self.<span class="pl-vo">collectionView</span>.<span class="pl-vo">dataSource</span> = self.<span class="pl-vo">dataSource</span>;
+}
+</pre></div>
+
+<hr>
+
+<h3>
+<a id="targets" class="anchor" href="#targets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Targets</h3>
+
+<p>Targets are one of the most powerful features of form, and we support to <code>hide</code>, <code>show</code>, <code>update</code>, <code>enable</code>, <code>disable</code> or <code>clear</code> a field using a target. You can even set a condition for your target to run!</p>
+
+<p>In the following example we show how to hide or show a field based on a dropdown selection.</p>
+
+<p><img src="https://github.com/hyperoslo/Form/blob/master/Images/target.gif" alt="Targets"></p>
+
+<h4>
+<a id="json-1" class="anchor" href="#json-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON</h4>
+
+<div class="highlight highlight-json"><pre>[
+  {
+    <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>group-id<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Group title<span class="pl-pds">"</span></span>,
+    <span class="pl-s1"><span class="pl-pds">"</span>sections<span class="pl-pds">"</span></span>:[
+      {
+        <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>section-0<span class="pl-pds">"</span></span>,
+        <span class="pl-s1"><span class="pl-pds">"</span>fields<span class="pl-pds">"</span></span>:[
+          {
+            <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>employment_type<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Employment type<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>select<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>:{
+              <span class="pl-s1"><span class="pl-pds">"</span>width<span class="pl-pds">"</span></span>:<span class="pl-c1">30</span>,
+              <span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>:<span class="pl-c1">1</span>
+            },
+            <span class="pl-s1"><span class="pl-pds">"</span>values<span class="pl-pds">"</span></span>:[
+              {
+                <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-c1">0</span>,
+                <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Part time<span class="pl-pds">"</span></span>,
+                <span class="pl-s1"><span class="pl-pds">"</span>default<span class="pl-pds">"</span></span>:<span class="pl-c1">true</span>,
+                <span class="pl-s1"><span class="pl-pds">"</span>targets<span class="pl-pds">"</span></span>:[
+                  {
+                    <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>bonus<span class="pl-pds">"</span></span>,
+                    <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>field<span class="pl-pds">"</span></span>,
+                    <span class="pl-s1"><span class="pl-pds">"</span>action<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>hide<span class="pl-pds">"</span></span>
+                  }
+                ]
+              },
+              {
+                <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-c1">1</span>,
+                <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Full time<span class="pl-pds">"</span></span>,
+                <span class="pl-s1"><span class="pl-pds">"</span>targets<span class="pl-pds">"</span></span>:[
+                  {
+                    <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>bonus<span class="pl-pds">"</span></span>,
+                    <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>field<span class="pl-pds">"</span></span>,
+                    <span class="pl-s1"><span class="pl-pds">"</span>action<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>show<span class="pl-pds">"</span></span>
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            <span class="pl-s1"><span class="pl-pds">"</span>id<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>bonus<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>Bonus<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span>:<span class="pl-s1"><span class="pl-pds">"</span>number<span class="pl-pds">"</span></span>,
+            <span class="pl-s1"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>:{
+              <span class="pl-s1"><span class="pl-pds">"</span>width<span class="pl-pds">"</span></span>:<span class="pl-c1">30</span>,
+              <span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>:<span class="pl-c1">1</span>
+            }
+          }
+        ]
+      }
+    ]
+  }
+]</pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Please check our <a href="https://github.com/hyperoslo/playbook/blob/master/GIT_AND_GITHUB.md">playbook</a> for guidelines on contributing.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p><a href="http://hyper.no">Hyper</a> made this. We're a digital communications agency with a passion for good code,
+and if you're using this library we probably want to <a href="http://www.hyper.no/jobs/ios-developer">hire you</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Form is available under the MIT license. See the <a href="https://github.com/hyperoslo/Form/blob/master/LICENSE.md">LICENSE</a>.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/hyperoslo/Form/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/hyperoslo/Form/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/hyperoslo/Form"></a> is maintained by <a href="https://github.com/hyperoslo">hyperoslo</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
