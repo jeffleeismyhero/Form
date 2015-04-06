@@ -2,18 +2,25 @@ import UIKit
 
 class SampleCollectionViewController: UICollectionViewController {
 
-  lazy var dataSource: FORMDataSource = Lazy.dataSource(self)
   var layout: FORMLayout
 
   var initialValues :Dictionary<NSObject, AnyObject>?
   var JSON: AnyObject?
+
+  lazy var dataSource: FORMDataSource = {[unowned self] in
+    FORMDataSource(JSON: self.JSON,
+      collectionView: self.collectionView,
+      layout: self.layout,
+      values: self.initialValues,
+      disabled: true)
+    }()
 
   init(initialValues: Dictionary<NSObject, AnyObject>, JSON: AnyObject?) {
     self.initialValues = initialValues
     self.JSON = JSON
     layout = FORMLayout()
 
-    super.init(collectionViewLayout: self.layout)
+    super.init(collectionViewLayout: layout)
   }
 
   required init(coder aDecoder: NSCoder) {
@@ -100,20 +107,6 @@ class SampleCollectionViewController: UICollectionViewController {
       "username": 1
       ])
     collectionView?.reloadData()
-  }
-}
-
-extension SampleCollectionViewController  {
-
-  struct Lazy  {
-
-    static func dataSource(aSelf: SampleCollectionViewController) -> FORMDataSource {
-      return FORMDataSource(JSON: aSelf.JSON,
-        collectionView: aSelf.collectionView,
-        layout: aSelf.layout,
-        values: aSelf.initialValues,
-        disabled: true)
-    }
   }
 }
 
