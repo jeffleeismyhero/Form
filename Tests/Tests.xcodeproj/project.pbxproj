@@ -86,6 +86,7 @@
 		44713C611AE8E9DC00AA97DA /* simple-number-field.json in Resources */ = {isa = PBXBuildFile; fileRef = 44713C601AE8E9DC00AA97DA /* simple-number-field.json */; };
 		44932E771AE79BBD00A159BE /* simple-section.json in Resources */ = {isa = PBXBuildFile; fileRef = 44932E761AE79BBD00A159BE /* simple-section.json */; };
 		4496E4961AE7913400F731C9 /* simple-text-field.json in Resources */ = {isa = PBXBuildFile; fileRef = 4496E4951AE7913400F731C9 /* simple-text-field.json */; };
+		7AA39F8E1B039CF900EF0222 /* FORMFloatFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39F8D1B039CF900EF0222 /* FORMFloatFormatterTests.m */; };
 		8EC9C8158643C507F883EEC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E09ABAE07DB25A266537B76 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BD2405701AE6B38D00592E19 /* default-values-in-template.json in Resources */ = {isa = PBXBuildFile; fileRef = BD24056F1AE6B38D00592E19 /* default-values-in-template.json */; };
 		BD5845751AC4074600596C62 /* FORMTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5845741AC4074600596C62 /* FORMTooltipView.m */; };
@@ -231,6 +232,7 @@
 		4496E4951AE7913400F731C9 /* simple-text-field.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-text-field.json"; sourceTree = "<group>"; };
 		4E09ABAE07DB25A266537B76 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		653AC6BBDF66E205BA44BA17 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7AA39F8D1B039CF900EF0222 /* FORMFloatFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FORMFloatFormatterTests.m; sourceTree = "<group>"; };
 		BD24056F1AE6B38D00592E19 /* default-values-in-template.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "default-values-in-template.json"; sourceTree = "<group>"; };
 		BD5845731AC4074600596C62 /* FORMTooltipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FORMTooltipView.h; sourceTree = "<group>"; };
 		BD5845741AC4074600596C62 /* FORMTooltipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FORMTooltipView.m; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 			isa = PBXGroup;
 			children = (
 				D5B56C091AE52F8500DD8816 /* FORMEmailFormatterTests.m */,
+				7AA39F8D1B039CF900EF0222 /* FORMFloatFormatterTests.m */,
 			);
 			path = Formatters;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				144A28D31A99B2CF004A9086 /* FORMBankAccountNumberInputValidator.m in Sources */,
 				144A28BD1A99B2CF004A9086 /* FORMDateFieldCell.m in Sources */,
 				14298D6E1ADDA78F00607A49 /* FORMValidatorTests.m in Sources */,
+				7AA39F8E1B039CF900EF0222 /* FORMFloatFormatterTests.m in Sources */,
 				149C29261A9A23DD00F88B91 /* FORMTargetTests.m in Sources */,
 				446C42661AF8B38F0002DFE9 /* FORMViewController.m in Sources */,
 				144A28DE1A99B2CF004A9086 /* FORMFieldValue.m in Sources */,
