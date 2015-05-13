@@ -36,6 +36,10 @@ typedef NS_ENUM(NSInteger, FORMFieldType) {
 @property (nonatomic) BOOL initiallyDisabled;
 @property (nonatomic) NSDate *minimumDate;
 @property (nonatomic) NSDate *maximumDate;
+@property (nonatomic) NSString *positiveFormat;
+@property (nonatomic) NSString *negativeFormat;
+@property (nonatomic) NSString *groupingSeparator;
+@property (nonatomic) NSString *decimalSeparator;
 
 @property (nonatomic) FORMFieldValidation *validation;
 @property (nonatomic) NSString *formula;
