@@ -3,20 +3,28 @@
 
 @implementation FORMFloatInputValidator
 
-- (BOOL)validateReplacementString:(NSString *)string withText:(NSString *)text withRange:(NSRange)range {
-    BOOL valid = [super validateReplacementString:string withText:text withRange:range];
-
+- (BOOL)validateReplacementString:(NSString *)string
+                         withText:(NSString *)text
+                        withRange:(NSRange)range {
+    BOOL valid = [super validateReplacementString:string
+                                         withText:text
+                                        withRange:range];
     if (!valid) return valid;
 
-    BOOL hasDelimiter = ([text hyp_containsString:@","] || [text hyp_containsString:@"."]);
-    BOOL stringIsNilOrDelimiter = (!string || [string isEqualToString:@","] || [string isEqualToString:@"."]);
+    BOOL hasDelimiter = ([text hyp_containsString:@","] ||
+                         [text hyp_containsString:@"."]);
+    BOOL stringIsNilOrDelimiter = (!string ||
+                                   [string isEqualToString:@","] ||
+                                   [string isEqualToString:@"."]);
+    if (hasDelimiter && stringIsNilOrDelimiter) {
+        valid = NO;
+    } else {
+        NSCharacterSet *floatSet = [NSCharacterSet characterSetWithCharactersInString:@"1234567890,."];
+        NSCharacterSet *stringSet = [NSCharacterSet characterSetWithCharactersInString:string];
+        valid = [floatSet isSupersetOfSet:stringSet];
+    }
 
-    if (hasDelimiter && stringIsNilOrDelimiter) return NO;
-
-    NSCharacterSet *floatSet = [NSCharacterSet characterSetWithCharactersInString:@"1234567890,."];
-    NSCharacterSet *stringSet = [NSCharacterSet characterSetWithCharactersInString:string];
-
-    return [floatSet isSupersetOfSet:stringSet];
+    return valid;
 }
 
 @end
