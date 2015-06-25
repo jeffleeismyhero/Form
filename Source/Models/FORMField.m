@@ -165,7 +165,8 @@ static NSString * const FORMFormatterSelector = @"formatString:reverse:";
     switch (self.type) {
         case FORMFieldTypeFloat:
             if ([self.value isKindOfClass:[NSString class]]) {
-		self.value = [self.value stringByReplacingOccurrencesOfString:@"." withString:self.decimalSeparator];
+                self.value = [self.value stringByReplacingOccurrencesOfString:@"." withString:self.decimalSeparator];
+                self.value = [self.value stringByReplacingOccurrencesOfString:self.groupingSeparator withString:@""];
             }
             return @([self.value floatValue]);
         case FORMFieldTypeNumber:
