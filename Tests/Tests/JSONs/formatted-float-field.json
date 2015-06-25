@@ -10,8 +10,8 @@
 	    "id": "formatted_float",
 	    "title": "My Formatted Float",
 	    "type": "float",
-	    "decimalSeparator": ".",
-	    "groupingSeparator": ",",
+	    "decimal_separator": ".",
+	    "grouping_separator": ",",
 	    "value": "1,234.56",
 	    "size": {
 	      "width": 25,
