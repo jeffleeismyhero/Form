@@ -90,8 +90,18 @@ static BOOL enabledProperty;
 
 - (void)setText:(NSString *)text {
     UITextRange *textRange = self.selectedTextRange;
-    NSString *newRawText = [self.formatter formatString:text
-                                                reverse:YES];
+    NSString *newRawText = text;
+    
+    if (self.type == FORMTextFieldTypeFloat) {
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        formatter.groupingSeparator = self.groupingSeparator;
+        formatter.decimalSeparator = self.decimalSeparator;
+        
+        newRawText = [self.formatter formatString:text reverse:YES formatter:formatter];
+    } else {
+        newRawText = [self.formatter formatString:text reverse:YES];
+    }
+    
     NSRange range = [self currentRange];
 
     BOOL didAddText  = (newRawText.length > self.rawText.length);
@@ -112,7 +122,16 @@ static BOOL enabledProperty;
                                             ![rawText isEqualToString:_rawText]));
 
     if (shouldFormat) {
-        self.text = [self.formatter formatString:rawText reverse:NO];
+        if (self.type == FORMTextFieldTypeFloat) {
+            NSNumberFormatter *formatter = [NSNumberFormatter new];
+            formatter.groupingSeparator = self.groupingSeparator;
+            formatter.decimalSeparator = self.decimalSeparator;
+            
+            self.text = [self.formatter formatString:rawText reverse:NO formatter:formatter];
+        } else {
+            self.text = [self.formatter formatString:rawText reverse:NO];
+        }
+
     } else {
         self.text = rawText;
     }
@@ -202,7 +221,15 @@ static BOOL enabledProperty;
 
 - (NSString *)rawText {
     if (self.formatter) {
-        return [self.formatter formatString:_rawText reverse:YES];
+        if (self.type == FORMTextFieldTypeFloat) {
+            NSNumberFormatter *formatter = [NSNumberFormatter new];
+            formatter.groupingSeparator = self.groupingSeparator;
+            formatter.decimalSeparator = self.decimalSeparator;
+            
+            return [self.formatter formatString:_rawText reverse:YES formatter:formatter];
+        } else {
+            return [self.formatter formatString:_rawText reverse:YES];
+        }
     }
 
     return _rawText;
