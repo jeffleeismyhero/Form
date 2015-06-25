@@ -208,19 +208,19 @@ static const NSInteger FORMTooltipNumberOfLines = 4;
 
                 if ([field.value isKindOfClass:[NSString class]]) {
                     NSMutableString *fieldValue = [field.value mutableCopy];
-		    NSString *decimalSeparator = (field.decimalSeparator) ? field.decimalSeparator : @",";
-		    NSString *groupingSeparator = (field.groupingSeparator) ? field.groupingSeparator : @" ";
-
-		    [fieldValue replaceOccurrencesOfString:groupingSeparator
-						withString:@""
-						   options:NSCaseInsensitiveSearch
-						     range:NSMakeRange(0, [fieldValue length])];
-
-		    [fieldValue replaceOccurrencesOfString:decimalSeparator
-                                                withString:@"."
+                    NSString *decimalSeparator = (field.decimalSeparator) ? field.decimalSeparator : @",";
+                    NSString *groupingSeparator = (field.groupingSeparator) ? field.groupingSeparator : @" ";
+                    
+                    [fieldValue replaceOccurrencesOfString:groupingSeparator
+                                                withString:@""
                                                    options:NSCaseInsensitiveSearch
                                                      range:NSMakeRange(0, [fieldValue length])];
 
+                    [fieldValue replaceOccurrencesOfString:decimalSeparator
+                                                withString:@"."
+                                                   options:NSCaseInsensitiveSearch
+                                                     range:NSMakeRange(0, [fieldValue length])];
+                    
                     NSNumberFormatter *formatter = [NSNumberFormatter new];
                     formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
                     value = [formatter numberFromString:fieldValue];
