@@ -3,25 +3,22 @@
 @implementation FORMFloatFormatter
 
 - (NSString *)formatString:(NSString *)string reverse:(BOOL)reverse formatter:(NSNumberFormatter *)formatter {
-    string = [super formatString:string reverse:reverse];
+    string = [super formatString:string reverse:reverse formatter:formatter];
     if (!string) return nil;
-    string = [string stringByReplacingOccurrencesOfString:@"." withString:formatter.decimalSeparator];
-
-    NSNumber *number = [formatter numberFromString:string];
-
+    
     if (reverse) {
-	[formatter setNumberStyle:NSNumberFormatterNoStyle];
+        return [string stringByReplacingOccurrencesOfString:formatter.decimalSeparator withString:@"."];
     } else {
-	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        string = [string stringByReplacingOccurrencesOfString:@"." withString:formatter.decimalSeparator];
+        return [string stringByReplacingOccurrencesOfString:@"" withString:formatter.groupingSeparator];
     }
-    string = [formatter stringFromNumber:number];
-    return string;
 }
 
 - (NSString *)formatString:(NSString *)string reverse:(BOOL)reverse {
   NSNumberFormatter *formatter = [NSNumberFormatter new];
-  formatter.positiveFormat = @"###.##";
+  formatter.groupingSeparator = @"";
   formatter.decimalSeparator = @",";
+  
   return [self formatString:string reverse:reverse formatter:formatter];
 }
 
