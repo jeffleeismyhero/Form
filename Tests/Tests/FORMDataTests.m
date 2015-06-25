@@ -386,6 +386,22 @@
     XCTAssertEqual(FORMValidationResultTypeValid, [emailField validate]);
 }
 
+- (void)testFormatValidation {
+    NSArray *JSON = [NSJSONSerialization JSONObjectWithContentsOfFile:@"forms.json"
+							     inBundle:[NSBundle bundleForClass:[self class]]];
+    FORMDataSource *dataSource = [[FORMDataSource alloc] initWithJSON:JSON
+						       collectionView:nil
+							       layout:nil
+							       values:@{@"email" : @"faultyEmail"}
+							     disabled:NO];
+
+    FORMField *emailField = [dataSource fieldWithID:@"email" includingHiddenFields:NO];
+    XCTAssertEqual(FORMValidationResultTypeInvalidFormat, [emailField validate]);
+
+    [dataSource reloadWithDictionary:@{@"email" : @"teknologi@hyper.no"}];
+    XCTAssertEqual(FORMValidationResultTypeValid, [emailField validate]);
+}
+
 - (void)testFieldWithIDIncludingHiddenFields {
     NSArray *JSON = [NSJSONSerialization JSONObjectWithContentsOfFile:@"forms.json"
                                                              inBundle:[NSBundle bundleForClass:[self class]]];
