@@ -171,15 +171,17 @@ static const NSInteger FORMTooltipNumberOfLines = 4;
 - (void)updateWithField:(FORMField *)field {
     [super updateWithField:field];
 
-    self.textField.hidden          = (field.sectionSeparator);
-    self.textField.inputValidator  = [self.field inputValidator];
-    self.textField.formatter       = [self.field formatter];
-    self.textField.typeString      = field.typeString;
-    self.textField.inputTypeString = field.inputTypeString;
-    self.textField.enabled         = !field.disabled;
-    self.textField.valid           = field.valid;
-    self.textField.rawText         = [self rawTextForField:field];
-    self.textField.info            = field.info;
+    self.textField.hidden            = (field.sectionSeparator);
+    self.textField.inputValidator    = [self.field inputValidator];
+    self.textField.formatter         = [self.field formatter];
+    self.textField.typeString        = field.typeString;
+    self.textField.inputTypeString   = field.inputTypeString;
+    self.textField.enabled           = !field.disabled;
+    self.textField.valid             = field.valid;
+    self.textField.rawText           = [self rawTextForField:field];
+    self.textField.info              = field.info;
+    self.textField.decimalSeparator  = field.decimalSeparator;
+    self.textField.groupingSeparator = field.groupingSeparator;
 }
 
 - (void)validate {
