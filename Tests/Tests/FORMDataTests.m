@@ -388,12 +388,12 @@
 
 - (void)testFloatFormatValidation {
     NSArray *JSON = [NSJSONSerialization JSONObjectWithContentsOfFile:@"formatted-float-field.json"
-							     inBundle:[NSBundle bundleForClass:[self class]]];
+                                                             inBundle:[NSBundle bundleForClass:[self class]]];
     FORMDataSource *dataSource = [[FORMDataSource alloc] initWithJSON:JSON
-						       collectionView:nil
-							       layout:nil
-							       values:@{@"formatted_float" : @"1234,56"}
-							     disabled:NO];
+
+
+
+
 
     FORMField *floatField = [dataSource fieldWithID:@"formatted_float" includingHiddenFields:NO];
     XCTAssertNotEqualObjects(@"1234.56", [[floatField rawFieldValue] stringValue]);
