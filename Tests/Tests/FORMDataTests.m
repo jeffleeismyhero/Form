@@ -386,28 +386,6 @@
     XCTAssertEqual(FORMValidationResultTypeValid, [emailField validate]);
 }
 
-- (void)testFloatFormatValidation {
-    NSArray *JSON = [NSJSONSerialization JSONObjectWithContentsOfFile:@"formatted-float-field.json"
-                                                             inBundle:[NSBundle bundleForClass:[self class]]];
-    FORMDataSource *dataSource = [[FORMDataSource alloc] initWithJSON:JSON
-
-
-
-
-
-    FORMField *floatField = [dataSource fieldWithID:@"formatted_float" includingHiddenFields:NO];
-    XCTAssertNotEqualObjects(@"1234.56", [[floatField rawFieldValue] stringValue]);
-
-    [dataSource reloadWithDictionary:@{@"formatted_float" : @"1,234.56"}];
-    XCTAssertEqualObjects([@(1234.56) stringValue], [[floatField rawFieldValue] stringValue]);
-
-    [dataSource reloadWithDictionary:@{@"formatted_float" : @"1234.00"}];
-    XCTAssertEqualObjects([@(1234.00) stringValue], [[floatField rawFieldValue] stringValue]);
-
-    [dataSource reloadWithDictionary:@{@"formatted_float" : @"1,234."}];
-    XCTAssertEqualObjects([@(1234) stringValue], [[floatField rawFieldValue] stringValue]);
-}
-
 - (void)testFieldWithIDIncludingHiddenFields {
     NSArray *JSON = [NSJSONSerialization JSONObjectWithContentsOfFile:@"forms.json"
                                                              inBundle:[NSBundle bundleForClass:[self class]]];
