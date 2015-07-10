@@ -15,11 +15,11 @@
 }
 
 - (NSString *)formatString:(NSString *)string reverse:(BOOL)reverse {
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    formatter.groupingSeparator = @"";
-    formatter.decimalSeparator = @",";
-
-    return [self formatString:string reverse:reverse formatter:formatter];
+  NSNumberFormatter *formatter = [NSNumberFormatter new];
+  formatter.groupingSeparator = @"";
+  formatter.decimalSeparator = @",";
+  
+  return [self formatString:string reverse:reverse formatter:formatter];
 }
 
 @end

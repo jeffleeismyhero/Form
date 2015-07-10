@@ -45,9 +45,8 @@
     field.value = @"1";
     field.type = FORMFieldTypeText;
     XCTAssertEqualObjects([cell rawTextForField:field], @"1");
-
+    
     field.type = FORMFieldTypeFloat;
-
     field.value = @"1 234,56";
     field.decimalSeparator = @",";
     field.groupingSeparator = @" ";
@@ -57,7 +56,7 @@
     field.decimalSeparator = @".";
     field.groupingSeparator = @",";
     XCTAssertEqualObjects([cell rawTextForField:field], @"1234.56");
-
+    
     field.value = @"1.234,56";
     field.decimalSeparator = @",";
     field.groupingSeparator = @".";
