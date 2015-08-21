@@ -849,6 +849,19 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
     [self.collectionView reloadData];
 }
 
+- (void)clear {
+    for (FORMGroup *group in self.formData.groups) {
+        for (FORMField *field in group.fields) {
+            field.value = nil;
+        }
+    }
+
+    self.formData.values = nil;
+    self.formData.removedValues = nil;
+
+    [self.collectionView reloadData];
+}
+
 - (void)validate {
     NSMutableSet *validatedFields = [NSMutableSet set];
 
