@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, FORMTextFieldInputType) {
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, copy) NSString *decimalSeparator;
 @property (nonatomic, copy) NSString *groupingSeparator;
+@property (nonatomic, copy) NSDictionary *styles;
 
 @property (nonatomic, getter = isValid)    BOOL valid;
 @property (nonatomic, getter = isActive)   BOOL active;
@@ -76,6 +77,10 @@ typedef NS_ENUM(NSInteger, FORMTextFieldInputType) {
 - (void)setValidBorderColor:(UIColor *)borderColor UI_APPEARANCE_SELECTOR;
 - (void)setInvalidBackgroundColor:(UIColor *)backgroundColor UI_APPEARANCE_SELECTOR;
 - (void)setInvalidBorderColor:(UIColor *)borderColor UI_APPEARANCE_SELECTOR;
+
+- (void)setClearButtonColor:(UIColor *)color UI_APPEARANCE_SELECTOR;
+- (void)setMinusButtonColor:(UIColor *)color UI_APPEARANCE_SELECTOR;
+- (void)setPlusButtonColor:(UIColor *)color UI_APPEARANCE_SELECTOR;
 
 @end
 

@@ -72,9 +72,9 @@ static const NSInteger FORMSelectMaxItemCount = 6;
 
     if (self.field.values.count <= FORMSelectMaxItemCount) {
         CGSize currentSize = FORMSelectPopoverSize;
-        CGFloat headerViewHeight = self.fieldValuesController.headerView.frame.size.height;
-        CGFloat labelHeight = round(self.fieldValuesController.headerView.labelHeight);
-        CGSize customSize = CGSizeMake(currentSize.width, (FORMFieldValuesCellHeight * self.field.values.count) + labelHeight + headerViewHeight + FORMTitleLabelY);
+
+        CGFloat labelHeight = floorf(self.fieldValuesController.headerView.labelHeight);
+        CGSize customSize = CGSizeMake(currentSize.width, (FORMFieldValuesCellHeight * self.field.values.count) + labelHeight + FORMTitleLabelY);
 
         self.fieldValuesController.preferredContentSize = customSize;
     }
@@ -90,7 +90,7 @@ static const NSInteger FORMSelectMaxItemCount = 6;
 
     [self validate];
 
-    [self.popoverController dismissPopoverAnimated:YES];
+    [fieldValuesTableViewController dismissViewControllerAnimated:YES completion:nil];
 
     if ([self.delegate respondsToSelector:@selector(fieldCell:updatedWithField:)]) {
         [self.delegate fieldCell:self updatedWithField:self.field];

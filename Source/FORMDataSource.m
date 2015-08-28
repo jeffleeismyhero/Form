@@ -10,7 +10,7 @@
 #import "FORMFieldValue.h"
 #import "HYPParsedRelationship.h"
 
-#import "UIColor+Hex.h"
+@import Hex;
 #import "NSString+HYPWordExtractor.h"
 #import "NSString+HYPFormula.h"
 #import "UIDevice+HYPRealOrientation.h"
@@ -72,25 +72,6 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
                               disabledFieldIDs:@[]
                                       disabled:disabled];
 
-    [collectionView registerClass:[FORMTextFieldCell class]
-       forCellWithReuseIdentifier:FORMTextFieldCellIdentifier];
-    
-   [collectionView registerClass:[FORMTextFieldCell class]
-       forCellWithReuseIdentifier:FORMCountFieldCellIdentifier];
-
-    [collectionView registerClass:[FORMSelectFieldCell class]
-       forCellWithReuseIdentifier:FORMSelectFormFieldCellIdentifier];
-
-    [collectionView registerClass:[FORMDateFieldCell class]
-       forCellWithReuseIdentifier:FORMDateFormFieldCellIdentifier];
-
-    [collectionView registerClass:[FORMButtonFieldCell class]
-       forCellWithReuseIdentifier:FORMButtonFieldCellIdentifier];
-
-    [collectionView registerClass:[FORMGroupHeaderView class]
-       forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-              withReuseIdentifier:FORMHeaderReuseIdentifier];
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
@@ -113,6 +94,20 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
     if (_collapsedGroups) return _collapsedGroups;
 
     _collapsedGroups = [NSMutableArray new];
+    
+    NSMutableArray *indexPaths = [NSMutableArray new];
+    
+    [self.formData.groups enumerateObjectsUsingBlock:^(FORMGroup *formGroup, NSUInteger idx, BOOL *stop) {
+        if (formGroup.collapsed) {
+            if (![_collapsedGroups containsObject:@(idx)]) {
+                for (NSInteger i = 0; i < formGroup.fields.count; i++) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:idx];
+                    [indexPaths addObject:indexPath];
+                }
+                [_collapsedGroups addObject:@(idx)];
+            }
+        }
+    }];
 
     return _collapsedGroups;
 }
@@ -153,25 +148,35 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
         case FORMFieldTypeDate:
         case FORMFieldTypeDateTime:
         case FORMFieldTypeTime:
-            identifier = FORMDateFormFieldCellIdentifier;
+            identifier = [NSString stringWithFormat:@"%@-%@", FORMDateFormFieldCellIdentifier, field.fieldID];
+            [collectionView registerClass:[FORMDateFieldCell class]
+               forCellWithReuseIdentifier:identifier];
             break;
 
         case FORMFieldTypeSelect:
-            identifier = FORMSelectFormFieldCellIdentifier;
+            identifier = [NSString stringWithFormat:@"%@-%@", FORMSelectFormFieldCellIdentifier, field.fieldID];
+            [collectionView registerClass:[FORMSelectFieldCell class]
+               forCellWithReuseIdentifier:identifier];
             break;
 
         case FORMFieldTypeText:
         case FORMFieldTypeFloat:
         case FORMFieldTypeNumber:
-            identifier = FORMTextFieldCellIdentifier;
+            identifier = [NSString stringWithFormat:@"%@-%@", FORMTextFieldCellIdentifier, field.fieldID];
+            [collectionView registerClass:[FORMTextFieldCell class]
+               forCellWithReuseIdentifier:identifier];
             break;
 
         case FORMFieldTypeCount:
-            identifier = FORMCountFieldCellIdentifier;
+            identifier = [NSString stringWithFormat:@"%@-%@", FORMCountFieldCellIdentifier, field.fieldID];
+            [collectionView registerClass:[FORMTextFieldCell class]
+               forCellWithReuseIdentifier:identifier];
             break;
 
         case FORMFieldTypeButton:
-            identifier = FORMButtonFieldCellIdentifier;
+            identifier = [NSString stringWithFormat:@"%@-%@", FORMButtonFieldCellIdentifier, field.fieldID];
+            [collectionView registerClass:[FORMButtonFieldCell class]
+               forCellWithReuseIdentifier:identifier];
             break;
 
         case FORMFieldTypeCustom: abort();
@@ -196,6 +201,12 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
     if (kind == UICollectionElementKindSectionHeader) {
         FORMGroup *group = self.formData.groups[indexPath.section];
         FORMGroupHeaderView *headerView;
+        
+        NSString *identifier = [NSString stringWithFormat:@"%@-%@", FORMHeaderReuseIdentifier, group.groupID];
+        [collectionView registerClass:[FORMGroupHeaderView class]
+           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                  withReuseIdentifier:identifier];
+
 
         if (self.configureGroupHeaderAtIndexPathBlock) {
             id configuredGroupHeaderView = self.configureGroupHeaderAtIndexPathBlock(group, collectionView, indexPath);
@@ -206,7 +217,7 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
 
         if (!headerView) {
             headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                            withReuseIdentifier:FORMHeaderReuseIdentifier
+                                                            withReuseIdentifier:identifier
                                                                    forIndexPath:indexPath];
         }
 
@@ -216,6 +227,8 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
             self.configureHeaderViewBlock(headerView, kind, indexPath, group);
         } else {
             headerView.headerLabel.text = group.title;
+            headerView.styles = group.styles;
+            headerView.collapsible = group.collapsible;
             headerView.delegate = self;
         }
 
@@ -400,19 +413,25 @@ static const CGFloat FORMKeyboardAnimationDuration = 0.3f;
     return !_disabled;
 }
 
+- (void)collapseAllGroups {
+    [self collapseAllGroupsForCollectionView:self.collectionView];
+}
+
 - (void)collapseAllGroupsForCollectionView:(UICollectionView *)collectionView {
     NSMutableArray *indexPaths = [NSMutableArray new];
-    
+
     [self.formData.groups enumerateObjectsUsingBlock:^(FORMGroup *formGroup, NSUInteger idx, BOOL *stop) {
-        if (![self.collapsedGroups containsObject:@(idx)]) {
-            for (NSInteger i = 0; i < formGroup.fields.count; i++) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:idx];
-                [indexPaths addObject:indexPath];
+        if (formGroup.collapsible) {
+            if (![self.collapsedGroups containsObject:@(idx)]) {
+                for (NSInteger i = 0; i < formGroup.fields.count; i++) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:idx];
+                    [indexPaths addObject:indexPath];
+                }
+                [self.collapsedGroups addObject:@(idx)];
             }
-            [self.collapsedGroups addObject:@(idx)];
         }
     }];
-    
+
     [collectionView deleteItemsAtIndexPaths:indexPaths];
     [collectionView.collectionViewLayout invalidateLayout];
 }
@@ -989,7 +1008,7 @@ includingHiddenFields:(BOOL)includingHiddenFields
         [self.collapsedGroups removeObject:@(group)];
         [collectionView insertItemsAtIndexPaths:indexPaths];
         [collectionView.collectionViewLayout invalidateLayout];
-    } else {
+    } else if (formGroup.collapsible) {
         [self.collapsedGroups addObject:@(group)];
         [collectionView deleteItemsAtIndexPaths:indexPaths];
         [collectionView.collectionViewLayout invalidateLayout];
