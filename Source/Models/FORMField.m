@@ -30,12 +30,12 @@ static NSString * const FORMFormatterSelector = @"formatString:reverse:";
     _valid = YES;
     _fieldID = remoteID;
     _validationResultType = FORMValidationResultTypeValid;
-    _title = [dictionary andy_valueForKey:@"title"];
+    _title = NSLocalizedString([dictionary andy_valueForKey:@"title"], nil);
     _typeString  = [dictionary andy_valueForKey:@"type"];
     _hidden = [[dictionary andy_valueForKey:@"hidden"] boolValue];
     _type = [self typeFromTypeString:self.typeString];
     _inputTypeString = [dictionary andy_valueForKey:@"input_type"];
-    _info = [dictionary andy_valueForKey:@"info"];
+    _info = NSLocalizedString([dictionary andy_valueForKey:@"info"], nil);
 
     _positiveFormat = [dictionary andy_valueForKey:@"positive_format"];
     if (!_positiveFormat) {

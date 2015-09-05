@@ -86,13 +86,12 @@
               }
             },
             {
-              "id":"image",
-              "type":"image",
+              "id":"textye",
+              "type":"textye",
               "size":{
                 "width":100,
-                "height":1.7
-              },
-              "hidden":true
+                "height":2
+              }
             }
           ]
         }
