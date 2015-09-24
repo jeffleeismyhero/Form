@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, FORMFieldType) {
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
                           position:(NSInteger)position
                           disabled:(BOOL)disabled
-                 disabledFieldsIDs:(NSArray *)disabledFieldsIDs NS_DESIGNATED_INITIALIZER;
+                 disabledFieldsIDs:(NSArray *)disabledFieldsIDs;
 
 + (FORMField *)fieldAtIndexPath:(NSIndexPath *)indexPath inSection:(FORMSection *)section;
 

@@ -16,7 +16,7 @@
 @property (nonatomic) NSString *groupingSeparator;
 @property (nonatomic) NSString *decimalSeparator;
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 - (BOOL)identifierIsEqualTo:(id)identifier;
 
