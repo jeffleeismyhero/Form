@@ -15,7 +15,7 @@ class RootController: FORMViewController, CustomFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView?.backgroundColor = UIColor(fromHex: "DAE2EA")
+        self.collectionView?.backgroundColor = UIColor(hex: "DAE2EA")
 
         self.collectionView?.registerClass(CustomField.self, forCellWithReuseIdentifier: CustomField.CellIdentifier)
 
