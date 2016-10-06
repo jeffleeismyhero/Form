@@ -22,6 +22,7 @@
                                                                @"title": @"First name",
                                                                @"placeholder": @"placeholder",
                                                                @"info": @"info",
+                                                               @"accessibility_label": @"Accessibility label",
                                                                @"value": @"John Malkobitch",
                                                                @"type": @"name",
                                                                @"size": @{@"width": @30,
@@ -41,6 +42,7 @@
     XCTAssertEqualObjects(field.info, @"info");
     XCTAssertEqualObjects(field.value, @"John Malkobitch");
     XCTAssertEqualObjects(field.typeString, @"name");
+    XCTAssertEqualObjects(field.accessibilityLabel, @"Accessibility label");
     XCTAssertTrue(field.type == FORMFieldTypeText);
     XCTAssertTrue(CGSizeEqualToSize(field.size, CGSizeMake(30, 1)));
     XCTAssertFalse(field.disabled);
