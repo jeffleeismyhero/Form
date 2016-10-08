@@ -204,7 +204,7 @@ Accessibility labels are used by VoiceOver on iOS to provide feedback to users w
 
 Field values are automatically mapped to Accessibility Value attributes to provide accurate feedback to users.
 
-In addition to providing assistive feedback to users with impairments, accessibility labels can be useful for UI testing. Libraries such as ![KIF](https://github.com/kif-framework/KIF), ![EarlGrey](https://github.com/google/EarlGrey), and ![Calabash](http://calaba.sh/) can use accessibility labels to access and control fields.
+In addition to providing assistive feedback to users with impairments, accessibility labels can be useful for UI testing. Libraries such as [KIF](https://github.com/kif-framework/KIF), [EarlGrey](https://github.com/google/EarlGrey), and [Calabash](http://calaba.sh/) can use accessibility labels to access and control fields.
 
 #### Example JSON
 ```json
